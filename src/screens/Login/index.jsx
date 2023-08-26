@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
 import { Input, LoginContainer, ButtonText, LoginButton, AnimeContainer } from './styles'
 import LottieView from 'lottie-react-native';
 import catAnime from './anime.json'
 import { Alert } from 'react-native';
 
-export const Login = () => {
+export const Login = ({navigation}) => {
   const [email, setEmail] = useState()  
   const [password, setPassword] = useState()
-  const navigation = useNavigation()
 
   const onHome = () => {
     if (email === "miguel@gmail.com" && password === "1234") {
