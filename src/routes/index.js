@@ -1,8 +1,24 @@
 import React from 'react'
 import { NavigationContainer} from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 import { Login } from '../screens/Login';
 import { Home } from '../screens/Home';
+
+const DrawerBar = () => {
+  const Drawer = createDrawerNavigator()
+  return (
+    <Drawer.Navigator screenOptions={{
+      headerShown: false,
+      drawerActiveBackgroundColor: "#e3ca0b",
+      drawerActiveTintColor: "#000",
+      drawerInactiveBackgroundColor: "gray",
+      drawerInactiveTintColor: "#fff",
+    }}>
+      <Drawer.Screen name='Home' component={Home}/>
+    </Drawer.Navigator>
+  )
+}
 
 export const Routes = () => {
   const Stack = createStackNavigator();
@@ -12,7 +28,7 @@ export const Routes = () => {
         headerShown: false
       }}>
         <Stack.Screen name='LoginScreen' component={Login} />
-        <Stack.Screen name='HomeScreen' component={Home} />
+        <Stack.Screen name='Drawer' component={DrawerBar} />
       </Stack.Navigator>
     </NavigationContainer>
   )
