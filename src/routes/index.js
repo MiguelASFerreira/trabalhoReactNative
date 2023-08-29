@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { Login } from '../screens/Login';
 import { Home } from '../screens/Home';
+import { Welcome } from '../screens/Welcome';
 
 const DrawerBar = () => {
   const Drawer = createDrawerNavigator()
@@ -27,6 +28,7 @@ export const Routes = () => {
       <Stack.Navigator screenOptions={{
         headerShown: false
       }}>
+        <Stack.Screen name='WelcomeScreen' component={Welcome} />
         <Stack.Screen name='LoginScreen' component={Login} />
         <Stack.Screen name='Drawer' component={DrawerBar} />
       </Stack.Navigator>
