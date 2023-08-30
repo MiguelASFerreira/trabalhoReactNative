@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { Login } from '../screens/Login';
 import { Home } from '../screens/Home';
 import { Welcome } from '../screens/Welcome';
+import { DetailsAnimes } from '../screens/Details';
 
 const DrawerBar = () => {
   const Drawer = createDrawerNavigator()
@@ -31,6 +32,7 @@ export const Routes = () => {
         <Stack.Screen name='WelcomeScreen' component={Welcome} />
         <Stack.Screen name='LoginScreen' component={Login} />
         <Stack.Screen name='Drawer' component={DrawerBar} />
+        <Stack.Screen name='DetailsScreen' component={DetailsAnimes} />
       </Stack.Navigator>
     </NavigationContainer>
   )

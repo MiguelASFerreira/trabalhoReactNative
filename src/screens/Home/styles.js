@@ -1,10 +1,4 @@
-import styled from 'styled-components/native'
-
-export const HomeContainer = styled.View`
-    background-color: #161616;
-    width: 100%;
-    height: 100%;
-`
+import styled, { css } from 'styled-components/native'
 
 export const HomeBackground = styled.ImageBackground`
     width: 100%;
@@ -21,3 +15,4 @@ export const HomeTitle = styled.Text`
     font-weight: bold;
     text-align: center;
 `
+

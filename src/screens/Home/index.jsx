@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { HomeContainer, HomeBackground, HomeHeader, HomeTitle } from './styles.js'
+import { CardAnime } from '../../components/CardAnime/index.jsx'
+import { HomeBackground, HomeHeader, HomeTitle } from './styles.js'
 import { FlatList } from 'react-native'
+import LottieView from 'lottie-react-native'
 
 import { api } from '../../services/api.js'
 
+import laod from '../../libs/load.json'
 import back from '../../../assets/back.png'
 import imageHeader from '../../../assets/background.jpg'
-import { CardAnime } from '../../components/CardAnime/index.jsx'
 
 
 export const Home = () => {
@@ -20,7 +22,7 @@ export const Home = () => {
         setAnimes(response.data.data)
         setLoad(false)
       } catch (error) {
-        console.log("API ERROR", error)
+        console.log(error)
       } finally {
         setLoad(false)
       }
@@ -28,26 +30,26 @@ export const Home = () => {
     getAnimes()
   }, [])
 
-  if (load) return null
+  if (!animes && load) {
+    return <Loading />
+  }
 
   return (
-    <HomeContainer>
-      <HomeBackground resizeMode='repeat' source={back}>
-        <HomeHeader source={imageHeader} />
-        <HomeTitle>Animes</HomeTitle>
-        <FlatList
-          horizontal
-          data={animes}
-          renderItem={({item}) => <CardAnime item={item} />}
-          keyExtractor={(item) => item.mal_id.toString()}
-        />
-      </HomeBackground>
-    </HomeContainer>
+    <HomeBackground resizeMode='repeat' source={back}>
+          <HomeHeader source={imageHeader} />
+          <HomeTitle>Animes</HomeTitle>
+          <FlatList
+            horizontal
+            data={animes}
+            renderItem={({item}) => <CardAnime item={item} />}
+            keyExtractor={(item) => item.mal_id.toString()}
+          />
+    </HomeBackground>
   )
 }
 
-// const Loading = () => {
-//   return (
-
-//   )
-// }
+const Loading = () => {
+  return (
+      <LottieView source={load} loop autoPlay />
+  )
+}
