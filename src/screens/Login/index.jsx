@@ -30,8 +30,6 @@ export const Login = ({navigation}) => {
     )
     
   }
-  console.log(email)
-  console.log(password)
 
   return (
     <LoginContainer>

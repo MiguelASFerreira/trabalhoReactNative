@@ -6,7 +6,7 @@ import LottieView from 'lottie-react-native'
 
 import { api } from '../../services/api.js'
 
-import laod from '../../libs/load.json'
+import load from '../../json/load.json'
 import back from '../../../assets/back.png'
 import imageHeader from '../../../assets/background.jpg'
 

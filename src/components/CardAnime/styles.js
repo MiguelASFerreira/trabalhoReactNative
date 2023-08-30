@@ -16,4 +16,5 @@ export const CardImage = styled.Image`
 export const CardTitle = styled.Text`
     color: white;
     text-align: center;
+    font-weight: bold;
 `
