@@ -13,6 +13,7 @@ import imageHeader from '../../../assets/background.jpg'
 
 export const Home = () => {
   const [animes, setAnimes] = useState([])
+  const [animesTop, setAnimesTop] = useState([])
   const [load, setLoad] = useState(true)
 
   useEffect(() => {
@@ -27,10 +28,23 @@ export const Home = () => {
         setLoad(false)
       }
     }
+
+    async function getAnimesTop() {
+      try {
+        const response = await api.get("/top/anime")
+        setAnimesTop(response.data.data)
+        setLoad(false)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoad(false)
+      }
+    }
     getAnimes()
+    getAnimesTop()
   }, [])
 
-  if (!animes && load) {
+  if (!animes && !animesTop && load) {
     return <Loading />
   }
 
@@ -41,6 +55,13 @@ export const Home = () => {
           <FlatList
             horizontal
             data={animes}
+            renderItem={({item}) => <CardAnime item={item} />}
+            keyExtractor={(item) => item.mal_id.toString()}
+          />
+          <HomeTitle>Animes Populares</HomeTitle>
+          <FlatList
+            horizontal
+            data={animesTop}
             renderItem={({item}) => <CardAnime item={item} />}
             keyExtractor={(item) => item.mal_id.toString()}
           />

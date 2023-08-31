@@ -13,6 +13,6 @@ export const HomeTitle = styled.Text`
     color: white;
     font-size: 30px;
     font-weight: bold;
-    text-align: center;
+    margin-left: 10px;
 `
 

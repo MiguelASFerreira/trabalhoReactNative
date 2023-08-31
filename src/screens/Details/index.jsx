@@ -14,37 +14,51 @@ import {
   GeneroAnime,
   SinopseContent,
   SinopseDescription,
+  ButtonTrailer,
 } from './styles'
 import {Duration} from '../../components/Duration'
 import { Faixa } from '../../components/Faixa'
 import { Season } from '../../components/Season'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { api } from '../../services/api'
 import LottieView from 'lottie-react-native'
 import load from '../../json/load.json'
 import { SeasonText } from '../../components/Season/styles'
-// import YoutubeIframe from "react-native-youtube-iframe";
-import { useWindowDimensions } from 'react-native'
+import YoutubePlayer from "react-native-youtube-iframe";
+import { Button } from 'react-native'
+import { View } from 'react-native'
+import { ModalVideo } from '../../components/ModalVideo'
+import { TouchableOpacity, Text } from 'react-native-gesture-handler'
 
-export const DetailsAnimes = () => {
+export const DetailsAnimes = ({navigation}) => {
   const route = useRoute()
-  const navigation = useNavigation()
   const { id } = route.params
-  // const { width } = useWindowDimensions()
   const [anime, setAnime] = useState(null)
   const [load, setLoad] = useState(true)
-  // const [playing, setPlaying] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  // const [play, setPlay] = useState(false)
 
+  
   // const onStateChange = useCallback((state) => {
   //   if (state === "ended") {
-  //     setPlaying(false);
+  //     setPlay(false);
   //   }
   // }, []);
-
+  
   // const togglePlaying = useCallback(() => {
-  //   setPlaying((prev) => !prev);
-  // }, []);
+    //   setPlay((prev) => !prev);
+    // }, []);
+
+    // Função para abrir o modal
+    const openModal = () => {
+      setModalVisible(true);
+    };
+  
+    // Função para fechar o modal
+    const closeModal = () => {
+      setModalVisible(false);
+    };
 
   useEffect(() => {
     async function getDetailsAnime() {
@@ -110,15 +124,13 @@ export const DetailsAnimes = () => {
         <SinopseContent>
           <SinopseDescription>{anime.synopsis}</SinopseDescription>
         </SinopseContent>
-        {/* <Line />
-        <YoutubeIframe 
-          play={playing}
-          height={400}
-          width={width}
-          videoId={anime.trailer.youtube_id}
-          onChangeState={onStateChange}
-        />
-        <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
+        <Line />
+          <ButtonTrailer title='Ver Trailer' onPress={openModal}/>
+          <ModalVideo 
+            visible={modalVisible}
+            onClose={closeModal}
+            videoId={anime.trailer.youtube_id} 
+          />
     </DetailsContainer>
   )
 }
