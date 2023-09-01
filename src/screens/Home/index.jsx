@@ -21,7 +21,7 @@ export const Home = () => {
   useEffect(() => {
     async function getAnimes() {
       try {
-        const response = await api.get("/anime")
+        const response = await api.get("/top/anime")
         setAnimes(response.data.data)
         setLoad(false)
       } catch (error) {
@@ -33,7 +33,7 @@ export const Home = () => {
 
     async function getMangas() {
       try {
-        const response = await api.get("/manga")
+        const response = await api.get("/top/manga")
         setMangas(response.data.data)
         setLoad(false)
       } catch (error) {
@@ -53,14 +53,14 @@ export const Home = () => {
   return (
     <HomeBackground resizeMode='repeat' source={back}>
           <HomeHeader source={imageHeader} />
-          <HomeTitle>Animes</HomeTitle>
+          <HomeTitle>Animes Populares</HomeTitle>
           <FlatList
             horizontal
             data={animes}
             renderItem={({item}) => <CardAnime item={item} />}
             keyExtractor={(item) => item.mal_id.toString()}
           />
-          <HomeTitle>Mangás</HomeTitle>
+          <HomeTitle>Mangás Populares</HomeTitle>
           <FlatList
             horizontal
             data={mangas}

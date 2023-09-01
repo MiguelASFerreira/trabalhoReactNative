@@ -11,6 +11,7 @@ export const PokemonHeader = styled.Image`
 `
 
 export const PokemonTitle = styled.Text`
+    text-align: center;
     color: white;
     font-size: 30px;
     font-weight: bold;
