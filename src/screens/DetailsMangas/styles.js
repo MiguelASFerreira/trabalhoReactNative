@@ -1,12 +1,11 @@
 import { styled } from "styled-components/native";
-import YoutubeIframe from "react-native-youtube-iframe";
 
 export const DetailsContainer = styled.ScrollView`
     flex: 1;
     background-color: #161616;
 `
 
-export const BannerAnime = styled.ImageBackground`
+export const BannerManga = styled.ImageBackground`
     width: 100%;
     height: 640px;
 `
@@ -14,45 +13,22 @@ export const BannerAnime = styled.ImageBackground`
 export const ButtonGoBack = styled.TouchableOpacity`
     display: flex;
     align-items: flex-start;
-    justify-content: baseline;
+    justify-content: flex-start;
     padding-top: 57px;
 `
 
-export const TitleAnime = styled.Text`
+export const TitleManga = styled.Text`
     text-align: center;
     color: white;
     font-weight: bold;
     font-size: 40px;
 `
 
-export const Episodes = styled.Text`
+export const CapVol = styled.Text`
     text-align: center;
     color: white;
     font-size: 28px;
     font-weight: bold;
-`
-
-export const DurationAnime = styled.Text`
-    text-align: center;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-`
-
-export const BottomRightSquare = styled.View`
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-`;
-
-
-export const Line = styled.View`
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 2px solid white;
 `
 
 export const Type = styled.Text`
@@ -62,6 +38,12 @@ export const Type = styled.Text`
     font-size: 20px;
 `
 
+export const Line = styled.View`
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid white;
+`
+
 export const GeneroText = styled.Text`
     color: white;
     font-size: 22px;
@@ -69,7 +51,7 @@ export const GeneroText = styled.Text`
     text-align: center;
 `
 
-export const GeneroAnime = styled.View`
+export const GeneroManga = styled.View`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,4 +92,5 @@ export const SinopseDescription = styled.Text`
     text-align: justify;
     font-size: 18px;
     width: 80%;
+    margin-bottom: 10px;
 `

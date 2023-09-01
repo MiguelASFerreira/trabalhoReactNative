@@ -9,11 +9,13 @@ import { api } from '../../services/api.js'
 import load from '../../json/load.json'
 import back from '../../../assets/back.png'
 import imageHeader from '../../../assets/background.jpg'
+import { DataFormat } from '../../components/DataFormat/index.jsx'
+import { CardMangas } from '../../components/CardManga/index.jsx'
 
 
 export const Home = () => {
   const [animes, setAnimes] = useState([])
-  const [animesTop, setAnimesTop] = useState([])
+  const [mangas, setMangas] = useState([])
   const [load, setLoad] = useState(true)
 
   useEffect(() => {
@@ -29,10 +31,10 @@ export const Home = () => {
       }
     }
 
-    async function getAnimesTop() {
+    async function getMangas() {
       try {
-        const response = await api.get("/top/anime")
-        setAnimesTop(response.data.data)
+        const response = await api.get("/manga")
+        setMangas(response.data.data)
         setLoad(false)
       } catch (error) {
         console.log(error)
@@ -41,10 +43,10 @@ export const Home = () => {
       }
     }
     getAnimes()
-    getAnimesTop()
+    getMangas()
   }, [])
 
-  if (!animes && !animesTop && load) {
+  if (!animes && !mangas && load) {
     return <Loading />
   }
 
@@ -58,11 +60,11 @@ export const Home = () => {
             renderItem={({item}) => <CardAnime item={item} />}
             keyExtractor={(item) => item.mal_id.toString()}
           />
-          <HomeTitle>Animes Populares</HomeTitle>
+          <HomeTitle>Mangás</HomeTitle>
           <FlatList
             horizontal
-            data={animesTop}
-            renderItem={({item}) => <CardAnime item={item} />}
+            data={mangas}
+            renderItem={({item}) => <CardMangas item={item} />}
             keyExtractor={(item) => item.mal_id.toString()}
           />
     </HomeBackground>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
   DetailsContainer, 
   ButtonGoBack, 
@@ -15,6 +15,7 @@ import {
   SinopseContent,
   SinopseDescription,
   ButtonTrailer,
+  SinopseText,
 } from './styles'
 import {Duration} from '../../components/Duration'
 import { Faixa } from '../../components/Faixa'
@@ -24,12 +25,8 @@ import { Ionicons } from '@expo/vector-icons'
 import { api } from '../../services/api'
 import LottieView from 'lottie-react-native'
 import load from '../../json/load.json'
-import { SeasonText } from '../../components/Season/styles'
-import YoutubePlayer from "react-native-youtube-iframe";
-import { Button } from 'react-native'
-import { View } from 'react-native'
 import { ModalVideo } from '../../components/ModalVideo'
-import { TouchableOpacity, Text } from 'react-native-gesture-handler'
+import { DataFormat } from '../../components/DataFormat'
 
 export const DetailsAnimes = ({navigation}) => {
   const route = useRoute()
@@ -37,25 +34,11 @@ export const DetailsAnimes = ({navigation}) => {
   const [anime, setAnime] = useState(null)
   const [load, setLoad] = useState(true)
   const [modalVisible, setModalVisible] = useState(false);
-  // const [play, setPlay] = useState(false)
-
   
-  // const onStateChange = useCallback((state) => {
-  //   if (state === "ended") {
-  //     setPlay(false);
-  //   }
-  // }, []);
-  
-  // const togglePlaying = useCallback(() => {
-    //   setPlay((prev) => !prev);
-    // }, []);
-
-    // Função para abrir o modal
     const openModal = () => {
       setModalVisible(true);
     };
   
-    // Função para fechar o modal
     const closeModal = () => {
       setModalVisible(false);
     };
@@ -76,7 +59,6 @@ export const DetailsAnimes = ({navigation}) => {
     getDetailsAnime()
   }, [])
   
-
   
   if (!anime && load) {
     return <Loading />
@@ -105,6 +87,8 @@ export const DetailsAnimes = ({navigation}) => {
         <Season season={anime.season}/>
         <Type>{anime.type}</Type>
         <Line />
+        <DataFormat inicio={anime.aired.from} encerramento={anime.aired.to}/>
+        <Line />
         <Episodes>Episódios: {anime.episodes || "Inderteminado"}</Episodes>
         <Line />
         <DurationAnime>
@@ -120,17 +104,20 @@ export const DetailsAnimes = ({navigation}) => {
           })}
         </GeneroAnime>
         <Line />
-        <SeasonText>Sinopse</SeasonText>
+        <SinopseText>Sinopse</SinopseText>
         <SinopseContent>
           <SinopseDescription>{anime.synopsis}</SinopseDescription>
         </SinopseContent>
         <Line />
-          <ButtonTrailer title='Ver Trailer' onPress={openModal}/>
-          <ModalVideo 
-            visible={modalVisible}
-            onClose={closeModal}
-            videoId={anime.trailer.youtube_id} 
-          />
+          {anime.trailer.youtube_id !== null ? 
+            <>
+              <ButtonTrailer title='Ver Trailer' onPress={openModal} />
+              <ModalVideo
+                visible={modalVisible}
+                onClose={closeModal}
+                videoId={anime.trailer.youtube_id} 
+              />
+            </> : ""}
     </DetailsContainer>
   )
 }
