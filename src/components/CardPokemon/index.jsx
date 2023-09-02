@@ -10,7 +10,7 @@ export const CardPokemon = ({item, backType, cardType}) => {
       <CardName>{item.name[0].toUpperCase() + item.name.slice(1)}</CardName>
       <CardTypes>
         {cardType.map((item) => (
-          <CardType card={item.type.name}>
+          <CardType key={item.slot} card={item.type.name}>
             <CardTypeName>{item.type.name[0].toUpperCase() + item.type.name.slice(1)}</CardTypeName>
           </CardType>
         ))}
