@@ -16,6 +16,8 @@ import {
   SinopseDescription,
   ButtonTrailer,
   SinopseText,
+  ButtonTitleTrailer,
+  ButtomCamp,
 } from './styles'
 import {Duration} from '../../components/Duration'
 import { Faixa } from '../../components/Faixa'
@@ -111,13 +113,18 @@ export const DetailsAnimes = ({navigation}) => {
         <Line />
           {anime.trailer.youtube_id !== null ? 
             <>
-              <ButtonTrailer title='Ver Trailer' onPress={openModal} />
+              <ButtomCamp>
+                <ButtonTrailer onPress={openModal}>
+                  <ButtonTitleTrailer>Ver Trailer</ButtonTitleTrailer>
+                </ButtonTrailer>
+              </ButtomCamp>
               <ModalVideo
                 visible={modalVisible}
                 onClose={closeModal}
                 videoId={anime.trailer.youtube_id} 
               />
             </> : ""}
+            <Line />
     </DetailsContainer>
   )
 }

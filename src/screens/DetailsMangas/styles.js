@@ -14,7 +14,8 @@ export const ButtonGoBack = styled.TouchableOpacity`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    padding-top: 57px;
+    margin-top: 57px;
+    margin-right: 87%;
 `
 
 export const TitleManga = styled.Text`

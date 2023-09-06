@@ -14,7 +14,8 @@ export const ButtonGoBack = styled.TouchableOpacity`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    padding-top: 57px;
+    margin-top: 57px;
+    margin-right: 87%;
 `
 
 export const TitleAnime = styled.Text`
@@ -112,8 +113,21 @@ export const SinopseDescription = styled.Text`
     margin-bottom: 10px;
 `
 
-export const ButtonTrailer = styled.Button`
+export const ButtomCamp = styled.View`
+    align-items: center;
+    justify-content: center;
+`
+
+export const ButtonTrailer = styled.TouchableOpacity`
+    align-items: center;
+    justify-content: center;
     width: 50%;
     height: 50px;
+    background-color: white;
+`
 
+export const ButtonTitleTrailer = styled.Text`
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
 `
