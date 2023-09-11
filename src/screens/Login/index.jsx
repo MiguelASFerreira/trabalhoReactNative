@@ -1,36 +1,21 @@
 import React, { useState } from 'react'
 import { Input, LoginContainer, ButtonText, LoginButton, AnimeContainer, FormContent, ErrorMessage } from './styles'
+import { useForm, Controller, FormProvider } from 'react-hook-form'
 import LottieView from 'lottie-react-native';
 import catAnime from './anime.json'
 import { Alert } from 'react-native';
 
 export const Login = ({navigation}) => {
-  const [email, setEmail] = useState()  
-  const [password, setPassword] = useState()
-  const [errorEmail, setErrorEmail] = useState('')  
-  const [errorPassword, setErrorPassword] = useState('')
-
-  const onHome = () => {
-    if (email === undefined && password === undefined) {
-      Alert.alert("Campos Não Preenchidos", "Preencha todos os campos")
-    } else if (email === undefined) {
-        setErrorEmail("Preencha o campo E-mail!")
-        setTimeout(() => {
-          setErrorEmail('')
-        }, 5000);
-    } else if (password === undefined) {
-        setErrorPassword("Preencha o campo Senha!")
-        setTimeout(() => {
-          setErrorPassword('')
-        }, 5000);
-    } else if (email === "Admin" && password === "1234") {
+  const methods = useForm();
+  const onHome = (data) => {
+    if (data.email === "Admin" && data.password === "123456") {
         return navigation.navigate("Drawer")
     } else (
       Alert.alert("Erro", "Login Incorreto")
     )
     
   }
-
+  
   return (
     <LoginContainer>
         <AnimeContainer
@@ -39,28 +24,55 @@ export const Login = ({navigation}) => {
         >
             <LottieView source={catAnime} loop autoPlay />
         </AnimeContainer>
-          <FormContent
+        <FormProvider>
+        <FormContent
             delay={400}
             animation="fadeInUpBig"
           >
-            <Input 
-              placeholder='E-mail' 
-              onChangeText={setEmail}
-              value={email}
-              inputMode='email'
+          <Controller
+            name="email"
+            control={methods.control}
+            defaultValue=""
+            rules={{ required: 'Email é obrigatório' }}
+            render={({ field }) => (
+              <Input
+                placeholder="Email"
+                value={field.value}
+                onChangeText={field.onChange}
+              />
+            )}
           />
-          <ErrorMessage>{errorEmail}</ErrorMessage>
-          <Input 
-              placeholder='Senha' 
+          {methods.formState.errors.email && (
+          <ErrorMessage>{methods.formState.errors.email.message}</ErrorMessage>
+        )}
+          <Controller
+          name="password"
+          control={methods.control}
+          defaultValue=""
+          rules={{
+            required: 'Senha é obrigatória',
+            minLength: {
+              value: 6,
+              message: 'A senha deve ter pelo menos 6 caracteres',
+            },
+          }}
+          render={({ field }) => (
+            <Input
+              placeholder="Senha"
+              value={field.value}
+              onChangeText={field.onChange}
               secureTextEntry
-              onChangeText={setPassword}
-              value={password}
-          />
-          <ErrorMessage>{errorPassword}</ErrorMessage>
-          <LoginButton onPress={onHome}>
-              <ButtonText>Entrar</ButtonText>
-          </LoginButton>
-        </FormContent>
+            />
+          )}
+        />
+        {methods.formState.errors.password && (
+          <ErrorMessage>{methods.formState.errors.password.message}</ErrorMessage>
+        )}
+        <LoginButton onPress={methods.handleSubmit(onHome)}>
+          <ButtonText>Entrar</ButtonText>
+        </LoginButton>
+      </FormContent>
+        </FormProvider>
     </LoginContainer>
   )
 }
